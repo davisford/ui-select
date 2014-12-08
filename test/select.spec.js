@@ -1553,7 +1553,13 @@ describe('ui-select tests', function() {
 
       expect(el.find('.ui-select-match-item [uis-transclude-append]:not(.ng-hide)').text())
          .toBe("Wladimir <wladimir@email.com>Samantha <samantha@email.com>Nicole <nicole@email.com>");
+    });
 
+    it('should be marked invalid when required and empty', function () {
+      scope.selection.selectedMultiple = [];
+      var el = createUiSelectMultiple({required: true});
+      expect(el.scope().$select.ngModel.$invalid).toBe(true);
+      expect(el.scope().$select.ngModel.$error.required).toBe(true);
     });
 
     it('should support multiple="multiple" attribute', function() {
