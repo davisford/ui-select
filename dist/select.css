@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.9.3 - 2014-12-08T19:58:14.229Z
+ * Version: 0.9.4 - 2014-12-10T18:56:51.330Z
  * License: MIT
  */
 
@@ -38,6 +38,10 @@
 
 .select2-locked > .select2-search-choice-close{
   display:none;
+}
+
+.select-locked > .ui-select-match-close{
+    display:none;
 }
 
 /* Selectize theme */

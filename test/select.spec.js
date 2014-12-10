@@ -83,7 +83,7 @@ describe('ui-select tests', function() {
   }
 
   function getMatchLabel(el) {
-    return $(el).find('.ui-select-match > span[ng-transclude]:not(.ng-hide)').text();
+    return $(el).find('.ui-select-match > button:first > span[ng-transclude]:not(.ng-hide)').text();
   }
 
   function clickItem(el, text) {
@@ -97,7 +97,7 @@ describe('ui-select tests', function() {
   }
 
   function clickMatch(el) {
-    $(el).find('.ui-select-match').click();
+    $(el).find('.ui-select-match > button:first').click();
     scope.$digest();
   }
 
@@ -313,6 +313,25 @@ describe('ui-select tests', function() {
 
     expect(el.scope().$select.selected).toEqual('false');
     expect(getMatchLabel(el)).toEqual('false');
+  });
+
+  it('should close an opened select when another one is opened', function() {
+    var el1 = createUiSelect();
+    var el2 = createUiSelect();
+    el1.appendTo(document.body);
+    el2.appendTo(document.body);
+
+    expect(isDropdownOpened(el1)).toEqual(false);
+    expect(isDropdownOpened(el2)).toEqual(false);
+    clickMatch(el1);
+    expect(isDropdownOpened(el1)).toEqual(true);
+    expect(isDropdownOpened(el2)).toEqual(false);
+    clickMatch(el2);
+    expect(isDropdownOpened(el1)).toEqual(false);
+    expect(isDropdownOpened(el2)).toEqual(true);
+
+    el1.remove();
+    el2.remove();
   });
 
   describe('disabled options', function() {
@@ -1635,7 +1654,6 @@ describe('ui-select tests', function() {
         var el = setupWithAttr(false);
         expect(el.scope().$select.searchEnabled).not.toBe(true);
       });
-
     });
 
   });
