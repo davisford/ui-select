@@ -290,8 +290,8 @@
             }else{
               setItemsFn(items);
             }
-            ctrl.ngModel.$modelValue = null; //Force scope model value and ngModel value to be out of sync to re-run formatters
-
+            // commenting out: this breaks ng-model bindings https://github.com/angular-ui/ui-select/issues/495
+            //ctrl.ngModel.$modelValue = null; //Force scope model value and ngModel value to be out of sync to re-run formatters
           }
         }
 
@@ -455,9 +455,9 @@
     // Toggle dropdown
     ctrl.toggle = function(e) {
       if (ctrl.open) {
-        ctrl.close(); 
+        ctrl.close();
         e.preventDefault();
-        e.stopPropagation();        
+        e.stopPropagation();
       } else {
         ctrl.activate();
       }
